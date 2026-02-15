@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: first-spring-demo
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/first_spring_demo?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&createDatabaseIfNotExist=true
+    username: root
+    password: test1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    generate-ddl: true
+
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+
+
+

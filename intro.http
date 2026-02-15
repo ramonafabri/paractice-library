@@ -1,0 +1,79 @@
+###
+POST http://localhost:8080/api/libraries
+Content-Type: application/json
+
+{
+  "name": "Libri",
+  "capacity": 10000
+}
+
+###
+POST http://localhost:8080/api/libraries
+Content-Type: application/json
+
+{
+  "name": "Readwell",
+  "capacity": 1000
+}
+
+###
+GET http://localhost:8080/api/libraries/Libri
+
+###
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "author": "Robert C. Martin",
+  "title": "Clean Code",
+  "bookType": "SCIENCE",
+  "libraryName": "Libri"
+}
+
+
+###
+POST http://localhost:8080/api/books/batch
+Content-Type: application/json
+
+[
+  {
+    "title": "Spring in Action",
+    "author": "Craig Walls",
+    "bookType": "SCIENCE",
+    "libraryName": "Libri"
+  },
+  {
+    "title": "Design Patterns",
+    "author": "Erich Gamma",
+    "bookType": "SCIENCE",
+    "libraryName": "Libri"
+  },
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "bookType": "FICTION",
+    "libraryName": "Libri"
+  },
+  {
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt",
+    "bookType": "SCIENCE",
+    "libraryName": "Libri"
+  },
+  {
+    "title": "The Little Prince",
+    "author": "Antoine de Saint-Exupéry",
+    "bookType": "CHILDREN",
+    "libraryName": "Libri"
+  },
+  {
+    "title": "Thinking, Fast and Slow",
+    "author": "Daniel Kahneman",
+    "bookType": "NON_FICTION",
+    "libraryName": "Libri"
+  }
+]
+
+###
+GET http://localhost:8080/api/books/The Little Prince
+

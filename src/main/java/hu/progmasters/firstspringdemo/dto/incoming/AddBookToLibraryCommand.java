@@ -9,16 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookCommand {
+public class AddBookToLibraryCommand {
 
     @NotBlank(message = "Title cannot be empty")
     private String title;
 
-    @NotBlank(message = "Author cannot be empty")
-    private String author;
-
-    @NotBlank(message = "Book type cannot be empty")
-    private String bookType;
-
+    @NotBlank(message = "Library cannot be empty")
+    private String libraryName;
 
 }

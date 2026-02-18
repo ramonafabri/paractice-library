@@ -30,6 +30,49 @@ Content-Type: application/json
   "libraryName": "Libri"
 }
 
+###
+POST localhost:8080/api/books/batch
+Content-Type: application/json
+
+[
+    {
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "bookType": "SCIENCE",
+      "libraryName": "Readwell"
+    },
+    {
+      "title": "Effective Java",
+      "author": "Joshua Bloch",
+      "bookType": "SCIENCE",
+      "libraryName": "Readwell"
+    },
+    {
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "bookType": "FICTION",
+      "libraryName": "Readwell"
+    },
+    {
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "bookType": "FICTION",
+      "libraryName": "Readwell"
+    },
+    {
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": "J.K. Rowling",
+      "bookType": "CHILDREN",
+      "libraryName": "Readwell"
+    },
+    {
+      "title": "Sapiens",
+      "author": "Yuval Noah Harari",
+      "bookType": "NON_FICTION",
+      "libraryName": "Readwell"
+    }
+]
+
 
 ###
 POST http://localhost:8080/api/books/batch
@@ -77,3 +120,5 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/books/The Little Prince
 
+###
+GET http://localhost:8080/api/books/Clean Code

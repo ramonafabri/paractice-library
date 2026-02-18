@@ -1,31 +1,40 @@
 server:
   port: 8080
+  servlet:
+    context-path: /first_spring_demo
 
 spring:
   application:
-    name: first-spring-demo
-
-  datasource:
-    url: jdbc:mysql://localhost:3306/first_spring_demo?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&createDatabaseIfNotExist=true
-    username: root
-    password: test1234
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-    generate-ddl: true
-
+    name: spring-ex
   servlet:
     encoding:
       charset: UTF-8
       enabled: true
       force: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/first_spring_demo?createDatabaseIfNotExist=true&autoReconnect=true&characterEncoding=utf8&useUnicode=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: test1234
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        jdbc:
+          time_zone: UTC
+  output:
+    ansi:
+      enabled: ALWAYS
 
-
+logging:
+  level:
+    hu.progmasters: debug
+    org.hibernate: warn
+    org.springframework.web: info
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(%-5level) %clr([%t]){faint} %clr(%c{36}){blue} %m%n"
 
 

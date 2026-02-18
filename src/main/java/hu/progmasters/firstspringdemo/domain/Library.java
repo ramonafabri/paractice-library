@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,7 +26,12 @@ public class Library {
     @Column(nullable = false)
     private Integer capacity;
 
-    @OneToMany (mappedBy = "library")
-    private List<Book> books;
+    @ManyToMany
+    @JoinTable(
+            name = "library_book",
+            joinColumns = @JoinColumn(name = "library_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private List<Book> books = new ArrayList<>();
 
 }

@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,9 +29,9 @@ public class Book {
     @Column(nullable=false, name ="book_type")
     private BookType bookType;
 
-    @ManyToOne
-    @JoinColumn(name= "library_id")
-    private Library library;
+    @ManyToMany(mappedBy = "books")
+    private List<Library> libraries = new ArrayList<>();
+
 
 
 }

@@ -17,6 +17,15 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8080/api/libraries
+Content-Type: application/json
+
+{
+"name": "NewOne",
+"capacity": 5000
+}
+
+###
 GET http://localhost:8080/api/libraries/Libri
 
 ###
@@ -121,4 +130,13 @@ Content-Type: application/json
 GET http://localhost:8080/api/books/The Little Prince
 
 ###
-GET http://localhost:8080/api/books/Clean Code
+GET http://localhost:8080/api/books?title=Clean%20Code
+
+###
+POST http://localhost:8080/api/books/add-to-library
+Content-Type: application/json
+
+  {
+    "title": "Clean Code",
+    "libraryName": "Readwell"
+  }

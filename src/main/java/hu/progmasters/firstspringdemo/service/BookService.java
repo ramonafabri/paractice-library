@@ -3,18 +3,17 @@ package hu.progmasters.firstspringdemo.service;
 import hu.progmasters.firstspringdemo.domain.Book;
 import hu.progmasters.firstspringdemo.domain.BookType;
 import hu.progmasters.firstspringdemo.domain.Library;
-import hu.progmasters.firstspringdemo.dto.incoming.AddBookToLibraryCommand;
 import hu.progmasters.firstspringdemo.dto.incoming.BookCommand;
 import hu.progmasters.firstspringdemo.dto.outgoing.BookDetails;
 import hu.progmasters.firstspringdemo.dto.outgoing.BookDetailsResponse;
 import hu.progmasters.firstspringdemo.repository.BookRepository;
+import hu.progmasters.firstspringdemo.repository.LibraryRepository;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,15 +21,16 @@ import java.util.List;
 public class BookService {
 
     private BookRepository bookRepository;
-    private final LibraryService libraryService;
     private final ModelMapper modelMapper;
+    private final LibraryRepository libraryRepository;
+
 
 
     @Autowired
-    public BookService(BookRepository bookRepository, LibraryService libraryService, ModelMapper modelMapper) {
+    public BookService(BookRepository bookRepository, ModelMapper modelMapper, LibraryRepository libraryRepository, LibraryRepository libraryRepository1) {
         this.bookRepository = bookRepository;
-        this.libraryService = libraryService;
         this.modelMapper = modelMapper;
+        this.libraryRepository = libraryRepository1;
     }
 
     public void createBook(@Valid BookCommand bookCommand) {
@@ -42,20 +42,6 @@ public class BookService {
         bookRepository.save(book);
     }
 
-
-    public void addBookToLibrary(AddBookToLibraryCommand command) {
-        Library library = libraryService.findLibraryByName(command.getLibraryName());
-        Book book = bookRepository.findBookByTitle(command.getTitle())
-                .orElseThrow(() -> new RuntimeException("Book not found"));
-        boolean alreadyExists = library.getBooks().stream()
-                .anyMatch(b -> b.getId().equals(book.getId()));
-
-        if (alreadyExists) {
-            throw new RuntimeException("Book already exists in this library");
-        }
-        library.getBooks().add(book);
-        book.getLibraries().add(library);
-    }
 
 
     public void createBooks(@Valid List<BookCommand> bookCommands) {
@@ -73,15 +59,38 @@ public class BookService {
     }
 
 
-//    public BookDetails getBookByTitle(String title) {
-//        Book book = findBookByTitle(title);
-//        BookDetails bookDetails = modelMapper.map(book, BookDetails.class);
-//        return bookDetails;
-//    }
+    public BookDetails getBookByTitle(String title) {
+        Book book = findBookByTitle(title);
+        BookDetails bookDetails = modelMapper.map(book, BookDetails.class);
+        return bookDetails;
+    }
+
+
+    public void addBookToLibrary(String title, String libraryName) {
+
+        Library library = libraryRepository.findLibraryByName(libraryName)
+                .orElseThrow(() -> new IllegalArgumentException("Library not found: " + libraryName));
+
+        Book book = bookRepository.findBookByTitle(title)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found: " + title));
+
+        boolean exists = library.getBooks().stream()
+                .anyMatch(b -> b.getId().equals(book.getId()));
+
+        if (exists) {
+            throw new IllegalStateException("Book already exists in this library");
+        }
+
+        library.getBooks().add(book);
+        book.getLibraries().add(library);
+
+        libraryRepository.save(library);
+    }
+
 
     public List<BookDetailsResponse> getBooksByTitle(String title) {
 
-        List<Book> books = bookRepository.findAllByTitle(title);
+        List<Book> books = bookRepository.findAllByTitleIgnoreCase(title);
 
         return books.stream()
                 .map(book -> {

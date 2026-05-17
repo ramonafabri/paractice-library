@@ -1,6 +1,5 @@
 package hu.progmasters.firstspringdemo.dto.outgoing;
 
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data

@@ -1,10 +1,12 @@
 package hu.progmasters.firstspringdemo.dto.outgoing;
 
 
-import hu.progmasters.firstspringdemo.domain.BookType;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +21,7 @@ public class BookDetails {
 
     private String bookType;
 
-    private String libraryName;
+    private List<String> libraryNames;
 
 
 }

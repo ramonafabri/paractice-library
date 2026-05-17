@@ -3,6 +3,7 @@ package hu.progmasters.firstspringdemo.controll;
 
 import hu.progmasters.firstspringdemo.dto.incoming.AddBookToLibraryCommand;
 import hu.progmasters.firstspringdemo.dto.incoming.BookCommand;
+import hu.progmasters.firstspringdemo.dto.outgoing.BookDetails;
 import hu.progmasters.firstspringdemo.dto.outgoing.BookDetailsResponse;
 import hu.progmasters.firstspringdemo.service.BookService;
 import jakarta.validation.Valid;
@@ -33,16 +34,16 @@ public class BookController {
 
     @PostMapping("/add-to-library")
     public ResponseEntity<Void> addBookToLibrary(@RequestBody @Valid AddBookToLibraryCommand command) {
-        bookService.addBookToLibrary(command);
+        bookService.addBookToLibrary(command.getTitle(), command.getLibraryName());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-//    @GetMapping("/{title}")
-//    public ResponseEntity<BookDetails> getBookByTitle(@PathVariable String title){
-//        BookDetails response = bookService.getBookByTitle(title);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
-//
+    @GetMapping("/{title}")
+    public ResponseEntity<BookDetails> getBookByTitle(@PathVariable String title){
+        BookDetails response = bookService.getBookByTitle(title);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<BookDetailsResponse>> getBooksByTitle(@RequestParam String title) {
         List<BookDetailsResponse> response = bookService.getBooksByTitle(title);

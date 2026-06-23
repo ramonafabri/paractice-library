@@ -1,7 +1,6 @@
 package hu.progmasters.firstspringdemo.controll;
 
 
-import hu.progmasters.firstspringdemo.domain.Library;
 import hu.progmasters.firstspringdemo.dto.incoming.LibraryCommand;
 import hu.progmasters.firstspringdemo.dto.outgoing.LibraryDetails;
 import hu.progmasters.firstspringdemo.service.LibraryService;
@@ -31,7 +30,7 @@ public class LibraryController {
 
     @GetMapping("{name}")
     public ResponseEntity<LibraryDetails> getLibraryByName(@PathVariable String name) {
-        LibraryDetails response = libraryService.getHiveByName(name);
+        LibraryDetails response = libraryService.getLibraryByName(name);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }

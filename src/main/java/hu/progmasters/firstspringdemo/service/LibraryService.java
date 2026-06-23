@@ -29,7 +29,7 @@ public class LibraryService {
     }
 
 
-    public LibraryDetails getHiveByName(String name) {
+    public LibraryDetails getLibraryByName(String name) {
         Library library = findLibraryByName(name);
         LibraryDetails libraryDetails = new LibraryDetails();
                 libraryDetails.setId(library.getId());

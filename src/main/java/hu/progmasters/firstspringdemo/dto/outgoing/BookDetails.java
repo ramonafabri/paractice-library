@@ -1,7 +1,5 @@
 package hu.progmasters.firstspringdemo.dto.outgoing;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

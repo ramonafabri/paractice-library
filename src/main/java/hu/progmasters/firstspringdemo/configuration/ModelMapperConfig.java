@@ -6,7 +6,6 @@ import hu.progmasters.firstspringdemo.domain.Library;
 import hu.progmasters.firstspringdemo.dto.outgoing.BookDetails;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

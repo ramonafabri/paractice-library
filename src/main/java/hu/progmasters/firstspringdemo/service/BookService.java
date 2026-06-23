@@ -27,10 +27,10 @@ public class BookService {
 
 
     @Autowired
-    public BookService(BookRepository bookRepository, ModelMapper modelMapper, LibraryRepository libraryRepository, LibraryRepository libraryRepository1) {
+    public BookService(BookRepository bookRepository, ModelMapper modelMapper, LibraryRepository libraryRepository) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
-        this.libraryRepository = libraryRepository1;
+        this.libraryRepository = libraryRepository;
     }
 
     public void createBook(@Valid BookCommand bookCommand) {
